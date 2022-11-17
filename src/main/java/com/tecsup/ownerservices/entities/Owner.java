@@ -85,6 +85,7 @@ public class Owner {
 		this.address = address;
 		this.city = city;
 		this.telephone = telephone;
+		
 	}
 
 	@Override
