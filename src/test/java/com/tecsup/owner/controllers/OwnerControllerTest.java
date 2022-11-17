@@ -140,7 +140,7 @@ public class OwnerControllerTest {
 	* @throws Exception
 	*/
 	@Test
-	public void testDeletePet() throws Exception {
+	public void testDeleteOwner() throws Exception {
 	
 	String NAME_PET = "Beethoven3";
 	int TYPE_ID = 1;

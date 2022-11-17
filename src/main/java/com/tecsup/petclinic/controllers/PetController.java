@@ -65,7 +65,6 @@ public class PetController {
 		pet.setName(newPet.getName());
 		pet.setOwnerId(newPet.getOwnerId());
 		pet.setTypeId(newPet.getTypeId());
-		pet.setBirthDate(newPet.getBirthDate());
 		return service.create(pet);
 	}
 	
