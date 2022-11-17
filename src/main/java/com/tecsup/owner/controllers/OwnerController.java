@@ -57,10 +57,12 @@ public class OwnerController {
 	@ResponseStatus(HttpStatus.CREATED)
 	Owner create(@RequestBody OwnerDTO newOwner) {
 		Owner owner = new Owner();
-		//owner.setName(newOwner.getName());
-		//owner.setOwnerId(newOwner.getOwnerId());
-		//owner.setTypeId(newOwner.getTypeId());
-		//owner.setBirthDate(newOwner.getBirthDate());
+		owner.setFirst_name(newOwner.getFirst_name());
+		owner.setId(newOwner.getId());
+		owner.setAddress(newOwner.getAddress());
+		owner.setCity(newOwner.getCity());
+		owner.setLast_name(newOwner.getLast_name());
+		owner.setTelephone(newOwner.getTelephone());
 		return service.create(owner);
 	}
 	
@@ -94,9 +96,12 @@ public class OwnerController {
 		Owner owner = null;
 		try {
 			owner = service.findById(id);
-			//owner.setName(newPet.getName());
-			//owner.setOwnerId(newPet.getOwnerId());
-			//owner.setTypeId(newPet.getTypeId());
+			owner.setFirst_name(newOwner.getFirst_name());
+			owner.setId(newOwner.getId());
+			owner.setAddress(newOwner.getAddress());
+			owner.setCity(newOwner.getCity());
+			owner.setLast_name(newOwner.getLast_name());
+			owner.setTelephone(newOwner.getTelephone());
 			service.update(owner);
 		} catch (OwnerNotFoundException e) {
 			owner = service.create(owner);
