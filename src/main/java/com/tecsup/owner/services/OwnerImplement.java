@@ -1,6 +1,6 @@
 package com.tecsup.owner.services;
 
-import java.util.List; 
+import java.util.List;  
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -13,7 +13,7 @@ import com.tecsup.owner.repositories.OwnerRepository;
 
 public class OwnerImplement implements OwnerServiceTest{
 
-	private static final Logger logger = LoggerFactory.getLogger(OwnerImplements.class);
+	private static final Logger logger = LoggerFactory.getLogger(OwnerImplement.class);
 
 	@Autowired
 	OwnerRepository ownerRepository;
