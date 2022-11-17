@@ -1,6 +1,6 @@
-package com.tecsup.petclinic.controllers;
+package com.tecsup.owner.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,29 +12,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tecsup.petclinic.dto.PetDTO;
-import com.tecsup.petclinic.entities.Pet;
-import com.tecsup.petclinic.exception.PetNotFoundException;
-import com.tecsup.petclinic.services.PetService;
+import com.tecsup.owner.dto.OwnerDTO;
+import com.tecsup.ownerservices.entities.Owner;
+import com.tecsup.owner.exception.OwnerNotFoundException;
+import com.tecsup.owner.services.OwnerServiceTest;
 
-/**
- * 
- * @author jgomezm
- *
- */
 @RestController
-public class PetController {
+public class OwnerController {
 
 	@Autowired
-	private PetService service;
+	private OwnerServiceTest service;
 	 
 	/**
 	 * 
 	 * @return
 	 */
 	// @JsonIgnore
-	@GetMapping("/pets")
-	public Iterable<Pet> getPets() {
+	@GetMapping("/owners")
+	public Iterable<Owner> getOwners() {
 		//
 		return service.findAll();
 	}
@@ -58,15 +53,15 @@ public class PetController {
 	 * @param newPet
 	 * @return
 	 */
-	@PostMapping("/pets")
+	@PostMapping("/owners")
 	@ResponseStatus(HttpStatus.CREATED)
-	Pet create(@RequestBody PetDTO newPet) {
-		Pet pet = new Pet();
-		pet.setName(newPet.getName());
-		pet.setOwnerId(newPet.getOwnerId());
-		pet.setTypeId(newPet.getTypeId());
-		pet.setBirthDate(newPet.getBirthDate());
-		return service.create(pet);
+	Owner create(@RequestBody OwnerDTO newOwner) {
+		Owner owner = new Owner();
+		//owner.setName(newOwner.getName());
+		//owner.setOwnerId(newOwner.getOwnerId());
+		//owner.setTypeId(newOwner.getTypeId());
+		//owner.setBirthDate(newOwner.getBirthDate());
+		return service.create(owner);
 	}
 	
 	
@@ -78,11 +73,11 @@ public class PetController {
 	 * @return
 	 * @throws PetNotFoundException
 	 */
-	@GetMapping("/pets/{id}")
-	ResponseEntity<Pet> findOne(@PathVariable Long id) {
+	@GetMapping("/owners/{id}")
+	ResponseEntity<Owner> findOne(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
-		} catch (PetNotFoundException e) {
+		} catch (OwnerNotFoundException e) {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
@@ -94,35 +89,35 @@ public class PetController {
 	 * @param id
 	 * @return
 	 */
-	@PutMapping("/pets/{id}")
-	Pet saveOrUpdate(@RequestBody PetDTO newPet, @PathVariable Long id) {
-		Pet pet = null;
+	@PutMapping("/owners/{id}")
+	Owner saveOrUpdate(@RequestBody OwnerDTO newOwner, @PathVariable Long id) {
+		Owner owner = null;
 		try {
-			pet = service.findById(id);
-			pet.setName(newPet.getName());
-			pet.setOwnerId(newPet.getOwnerId());
-			pet.setTypeId(newPet.getTypeId());
-			service.update(pet);
-		} catch (PetNotFoundException e) {
-			pet = service.create(pet);
+			owner = service.findById(id);
+			//owner.setName(newPet.getName());
+			//owner.setOwnerId(newPet.getOwnerId());
+			//owner.setTypeId(newPet.getTypeId());
+			service.update(owner);
+		} catch (OwnerNotFoundException e) {
+			owner = service.create(owner);
 		}
-		return pet;
+		return owner;
 	}
 
 	/**
 	 * 
 	 * @param id
 	 */
-	@DeleteMapping("/pets/{id}")
+	@DeleteMapping("/owners/{id}")
 	ResponseEntity<String> delete(@PathVariable Long id) {
 
 		try {
 			service.delete(id);
 			return new ResponseEntity<>("" + id, HttpStatus.OK);
-		} catch (PetNotFoundException e) {
+		} catch (OwnerNotFoundException e) {
 			// TODO Auto-generated catch block
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
 }
