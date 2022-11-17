@@ -4,16 +4,18 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface OwnerRepository extends CrudRepository<?, Long>{
-	
-	// List<Owner> findByFirst_Name(String first_name);
+import com.tecsup.ownerservices.entities.Owner;
 
-	// List<Owner> findByLast_Name(String last_name);
+public interface OwnerRepository extends CrudRepository<Owner, Long>{
+	
+	List<Owner> findByFirst_Name(String first_name);
 
-	// List<Owner> findByAddress(String address);
+	List<Owner> findByLast_Name(String last_name);
+
+	List<Owner> findByAddress(String address);
 	
-	// List<Owner> findByCity(String city);
+	List<Owner> findByCity(String city);
 	
-	// List<Owner> findByTelephone(String telephone);
+	List<Owner> findByTelephone(String telephone);
 
 }
