@@ -133,7 +133,7 @@ public class OwnerControllerTest {
 	* @throws Exception
 	*/
 	@Test
-	public void testDeletePet() throws Exception {
+	public void testDeleteOwner() throws Exception {
 	
 		String FNAME_OWNER = "George3";
 		String LNAME_OWNER = "Franklin3";

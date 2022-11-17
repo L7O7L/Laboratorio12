@@ -29,29 +29,22 @@ public class Pet {
 	@Column(name = "owner_id")
 	private int ownerId;
 	
-	@Column(name = "birth_date")
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd",  timezone = "GMT+8")
-	private Date birthDate;
-	
 	public Pet() {
 	}
 
-	public Pet(long id, String name, int type_id, int owner_id, Date birth_date) {
+	public Pet(long id, String name, int type_id, int owner_id) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.typeId = type_id;
 		this.ownerId = owner_id;
-		this.birthDate = birth_date;
 	}
 
-	public Pet(String name, int type_id, int owner_id, Date birth_date) {
+	public Pet(String name, int type_id, int owner_id) {
 		super();
 		this.name = name;
 		this.typeId = type_id;
 		this.ownerId = owner_id;
-		this.birthDate = birth_date;
 
 	}
 
@@ -90,17 +83,7 @@ public class Pet {
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", name=" + name + ", typeId=" + typeId + ", ownerId=" + ownerId + ", birthDate="
-				+ birthDate + "]";
+				+ "]";
 	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
-
 
 }
