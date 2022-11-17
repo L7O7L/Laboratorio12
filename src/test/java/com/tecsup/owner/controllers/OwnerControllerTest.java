@@ -9,13 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,9 +22,10 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import com.tecsup.owner.controllers.OwnerController;
 import com.tecsup.owner.dto.OwnerDTO;
 
+@AutoConfigureMockMvc
+@SpringBootTest
 public class OwnerControllerTest {
 
 	private static final Logger logger 
@@ -59,33 +59,25 @@ public class OwnerControllerTest {
 	* 
 	*/
 	@Test
-	public void testFindPetOK() throws Exception {
+	public void testFindOwnerOK() throws Exception {
 	
 	int ID_SEARCH = 1;
-	String NAME_PET = "Leo";
-	int TYPE_ID = 1;
-	int OWNER_ID = 1;
-	String DATE_REF = "2000-09-07";
-	
-	/*
-	 {
-	    "id": 1,
-	    "name": "Leo",
-	    "typeId": 1,
-	    "ownerId": 1,
-	    "birthDate": "	2000-09-07"
-	}
-	 */
+	String FNAME_OWNER = "George";
+	String LNAME_OWNER = "Franklin";
+	String ADDRESS_OWNER = "110 W. Liberty St.";
+	String CITY_OWNER = "Madison";
+	String TEL_OWNER = "6085551023";
 	
 	mockMvc.perform(get("/owners/" + ID_SEARCH))  // Finding object with ID = 1
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 			//.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.id", is(1)))
-			.andExpect(jsonPath("$.name", is(NAME_PET)))
-			.andExpect(jsonPath("$.typeId", is(TYPE_ID)))
-			.andExpect(jsonPath("$.ownerId", is(OWNER_ID)))
-			.andExpect(jsonPath("$.birthDate", is(DATE_REF)));
+			.andExpect(jsonPath("$.firstName", is(FNAME_OWNER)))
+			.andExpect(jsonPath("$.lastName", is(LNAME_OWNER)))
+			.andExpect(jsonPath("$.address", is(ADDRESS_OWNER)))
+			.andExpect(jsonPath("$.city", is(CITY_OWNER)))
+			.andExpect(jsonPath("$.telephone", is(TEL_OWNER)));
 	
 	}
 	
@@ -111,13 +103,13 @@ public class OwnerControllerTest {
 	@Test
 	public void testCreateOwner() throws Exception {
 	
-	String NAME_PET = "BeethovenY";
-	int TYPE_ID = 1;
-	int OWNER_ID = 1;
-	String DATE_REF = "2021-10-03";
-	Date DATE = new SimpleDateFormat("yyyy-MM-dd").parse(DATE_REF);
+	String FNAME_OWNER = "George2";
+	String LNAME_OWNER = "Franklin2";
+	String ADDRESS_OWNER = "Nueva direccion";
+	String CITY_OWNER = "Madison2";
+	String TEL_OWNER = "9999999999";
 	
-	OwnerDTO newOwner = new OwnerDTO(DATE_REF, DATE_REF, DATE_REF, NAME_PET, DATE_REF);
+	OwnerDTO newOwner = new OwnerDTO(FNAME_OWNER, LNAME_OWNER, ADDRESS_OWNER, CITY_OWNER, TEL_OWNER);
 	
 	logger.info(newOwner.toString());
 	logger.info(om.writeValueAsString(newOwner));
@@ -127,10 +119,11 @@ public class OwnerControllerTest {
 	        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
 	        .andDo(print())
 	        .andExpect(status().isCreated())
-	        .andExpect(jsonPath("$.name", is(NAME_PET)))
-	        .andExpect(jsonPath("$.typeId", is(TYPE_ID)))
-	        .andExpect(jsonPath("$.ownerId", is(OWNER_ID)))
-			.andExpect(jsonPath("$.birthDate", is(DATE_REF)));
+	        .andExpect(jsonPath("$.firstName", is(FNAME_OWNER)))
+	        .andExpect(jsonPath("$.lastName", is(LNAME_OWNER)))
+	        .andExpect(jsonPath("$.address", is(ADDRESS_OWNER)))
+			.andExpect(jsonPath("$.city", is(CITY_OWNER)))
+			.andExpect(jsonPath("$.telephone", is(TEL_OWNER)));
 	
 	}
 	
@@ -142,13 +135,13 @@ public class OwnerControllerTest {
 	@Test
 	public void testDeletePet() throws Exception {
 	
-	String NAME_PET = "Beethoven3";
-	int TYPE_ID = 1;
-	int OWNER_ID = 1;
-	String DATE_REF = "2021-10-03";
-	Date DATE = new SimpleDateFormat("yyyy-MM-dd").parse(DATE_REF);
+		String FNAME_OWNER = "George3";
+		String LNAME_OWNER = "Franklin3";
+		String ADDRESS_OWNER = "Nueva direccion2";
+		String CITY_OWNER = "Madison3";
+		String TEL_OWNER = "9999999990";
 	
-	OwnerDTO newOwner = new OwnerDTO(DATE_REF, DATE_REF, DATE_REF, NAME_PET, DATE_REF);
+	OwnerDTO newOwner = new OwnerDTO(FNAME_OWNER, LNAME_OWNER, ADDRESS_OWNER, CITY_OWNER, TEL_OWNER);
 	
 	ResultActions mvcActions = mockMvc.perform(post("/owners")
 	        .content(om.writeValueAsString(newOwner))

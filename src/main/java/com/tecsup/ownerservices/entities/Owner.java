@@ -1,5 +1,6 @@
 package com.tecsup.ownerservices.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,10 +12,15 @@ public class Owner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@Column(name = "firstName")
 	private String first_name;
+	@Column(name = "lastName")
 	private String last_name;
+	@Column(name = "address")
 	private String address;
+	@Column(name = "city")
 	private String city;
+	@Column(name = "telephone")
 	private String telephone;
 	
 	public long getId() {
