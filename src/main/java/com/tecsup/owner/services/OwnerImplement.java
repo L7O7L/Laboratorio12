@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tecsup.ownerservices.entities.Owner;
-import com.tecsup.ownerservices.expection.OwnerNotFoundException;
+import com.tecsup.owner.exception.OwnerNotFoundException;
 import com.tecsup.owner.repositories.OwnerRepository;
 
 public class OwnerImplement implements OwnerServiceTest{

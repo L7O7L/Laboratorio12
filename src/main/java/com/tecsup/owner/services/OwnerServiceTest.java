@@ -3,7 +3,7 @@ package com.tecsup.owner.services;
 import java.util.List;
 
 import com.tecsup.ownerservices.entities.Owner;
-import com.tecsup.ownerservices.expection.OwnerNotFoundException;
+import com.tecsup.owner.exception.OwnerNotFoundException;
 
 public interface OwnerServiceTest {
 
